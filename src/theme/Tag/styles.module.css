@@ -1,0 +1,37 @@
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+:root {
+  --docusaurus-tag-list-border: var(--ifm-color-emphasis-300);
+}
+
+.tag:hover {
+  text-decoration: none;
+}
+
+.tagRegular {
+  border-radius: var(--ifm-global-radius);
+  /* padding: 0.2rem 0.5rem 0.3rem; */
+  font-size: 90%;
+}
+
+.tagWithCount {
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-left: 0;
+}
+
+.tagWithCount span {
+  /* background: var(--ifm-color-secondary);
+  color: var(--ifm-color-black); */
+  font-size: 0.7rem;
+  line-height: 1.2;
+  border-radius: var(--ifm-global-radius);
+  /* padding: 0.1rem 0.4rem; */
+  /* margin-left: 0.3rem; */
+}

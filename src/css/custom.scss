@@ -1,0 +1,155 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --mimicry-base-color: #c9d2de;
+  --mimicry-highlight-color: #dfeaf9;
+  --mimicry-darkness-color: #9ea8b5;
+  --mimicry-text-color: #4a586b;
+  --layout-background-color: var(--mimicry-base-color);
+
+  // --ifm-color-primary: #12affa;
+  // --ifm-color-primary-dark: #05a1ec;
+  // --ifm-color-primary-darker: #0598df;
+  // --ifm-color-primary-darkest: #047eb8;
+  // --ifm-color-primary-light: #2cb8fb;
+  // --ifm-color-primary-lighter: #b0e6ff;
+  // --ifm-color-primary-lightest: #d5f1fd;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  --ifm-navbar-background-color: var(--mimicry-base-color);
+
+  --ifm-toc-border-color: rgba(0, 0, 0, 0);
+  --ifm-toc-padding-vertical: 0;
+
+  --ifm-container-width: 1300px;
+  --ifm-container-width-xl: 1500px;
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+:root[data-theme='dark'] {
+  --mimicry-base-color: #242526;
+  --mimicry-highlight-color: #2e3031;
+  --mimicry-darkness-color: #18191a;
+  --mimicry-text-color: #4a586b;
+  --layout-background-color: var(--mimicry-base-color);
+
+  // --ifm-color-primary: #12affa;
+  // --ifm-color-primary-dark: #05a1ec;
+  // --ifm-color-primary-darker: #0598df;
+  // --ifm-color-primary-darkest: #047eb8;
+  // --ifm-color-primary-light: #2cb8fb;
+  // --ifm-color-primary-lighter: #b0e6ff;
+  // --ifm-color-primary-lightest: #d5f1fd;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  --ifm-navbar-background-color: var(--mimicry-base-color);
+
+  --ifm-toc-border-color: rgba(0, 0, 0, 0);
+  --ifm-toc-padding-vertical: 0;
+}
+
+body {
+  background-color: var(--mimicry-base-color);
+}
+
+.navbar__link {
+  background-color: var(--mimicry-base-color);
+  box-shadow: 3px 3px 9px var(--mimicry-darkness-color),
+    -3px -3px 9px var(--mimicry-highlight-color);
+  margin-right: 1rem;
+  border-radius: 3px;
+  &:hover {
+    box-shadow: 0 0 0 var(--mimicry-darkness-color),
+      0 0 0 var(--mimicry-highlight-color),
+      inset -3px -3px 9px var(--mimicry-highlight-color),
+      inset 3px 3px 9px var(--mimicry-darkness-color);
+  }
+  &--active {
+    box-shadow: 0 0 0 var(--mimicry-darkness-color),
+      0 0 0 var(--mimicry-highlight-color),
+      inset -3px -3px 9px var(--mimicry-highlight-color),
+      inset 3px 3px 9px var(--mimicry-darkness-color);
+  }
+}
+
+.breadcrumbs__link {
+  background-color: var(--mimicry-base-color);
+  box-shadow: 3px 3px 9px var(--mimicry-darkness-color),
+    -3px -3px 9px var(--mimicry-highlight-color);
+  &:hover {
+    background-color: none;
+    box-shadow: 0 0 0 var(--mimicry-darkness-color),
+      0 0 0 var(--mimicry-highlight-color),
+      inset -3px -3px 9px var(--mimicry-highlight-color),
+      inset 3px 3px 9px var(--mimicry-darkness-color);
+  }
+}
+
+.breadcrumbs__item--active {
+  .breadcrumbs__link {
+    box-shadow: 0 0 0 var(--mimicry-darkness-color),
+      0 0 0 var(--mimicry-highlight-color),
+      inset -3px -3px 9px var(--mimicry-highlight-color),
+      inset 3px 3px 9px var(--mimicry-darkness-color);
+  }
+}
+
+.mimicry-wrap {
+  background-color: var(--mimicry-base-color);
+  box-shadow: 3px 3px 9px var(--mimicry-darkness-color),
+    -3px -3px 9px var(--mimicry-highlight-color);
+  border-radius: var(--ifm-pagination-nav-border-radius);
+  transition: box-shadow 0.2s;
+  padding: 1rem;
+  &.sunken {
+    box-shadow: 0 0 0 var(--mimicry-darkness-color),
+      0 0 0 var(--mimicry-highlight-color),
+      inset -3px -3px 9px var(--mimicry-highlight-color),
+      inset 3px 3px 9px var(--mimicry-darkness-color);
+  }
+}
+
+.mimicry-button {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  background-color: var(--mimicry-base-color);
+  box-shadow: 3px 3px 9px var(--mimicry-darkness-color),
+    -3px -3px 9px var(--mimicry-highlight-color);
+  color: var(--mimicry-text-color);
+  border-radius: 3px;
+  cursor: pointer;
+  user-select: none;
+  transition: box-shadow 0.2s;
+  font-size: 16px;
+  &:active {
+    box-shadow: 0 0 0 var(--mimicry-darkness-color),
+      0 0 0 var(--mimicry-highlight-color),
+      inset -3px -3px 9px var(--mimicry-highlight-color),
+      inset 3px 3px 9px var(--mimicry-darkness-color);
+  }
+  &.active {
+    box-shadow: 0 0 0 var(--mimicry-darkness-color),
+      0 0 0 var(--mimicry-highlight-color),
+      inset -3px -3px 9px var(--mimicry-highlight-color),
+      inset 3px 3px 9px var(--mimicry-darkness-color);
+  }
+  &.hover-active {
+    &:hover {
+      box-shadow: 0 0 0 var(--mimicry-darkness-color),
+        0 0 0 var(--mimicry-highlight-color),
+        inset -3px -3px 9px var(--mimicry-highlight-color),
+        inset 3px 3px 9px var(--mimicry-darkness-color);
+    }
+  }
+}
+
+.flex-a-c {
+  display: flex;
+  align-items: center;
+}
