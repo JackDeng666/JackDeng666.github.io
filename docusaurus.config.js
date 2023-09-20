@@ -83,10 +83,9 @@ const config = {
         hideOnScroll: true,
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'right',
-            label: '学习'
+            label: 'Docker 笔记',
+            to: 'docs/docker/',
+            position: 'right'
           },
           { to: '/blog', label: '博客', position: 'right' }
         ]
