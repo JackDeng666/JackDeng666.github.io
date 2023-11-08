@@ -6,40 +6,103 @@ title: 工程化配置
 
 monorepo 的一个优势点是，可以让我们在多个项目中，标准化一套代码 prettier、eslint、git hook 等配置。
 
+### 配置 eslint、prettier
+
 当编码完成时，我们使用 eslint 按照一定的规则对代码进行代码质量和格式检查，检查通过后再提交代码。
 
 eslint 也可以对代码进行一定的自动格式化，但这并不是 eslint 的侧重点，所以我们还会引入 prettier 来对我们的代码进行自动格式化以统一代码风格。
 
-如果仅有 eslint 和 prettier，那我们需要在代码提交前手动执行 prettier 和 eslint ，对代码进行格式化以及代码质量和格式检查，这时候可以使用 git 的 hook 功能，而 husky 工具可以创建管理仓库中的所有 git hooks。
-
-随着代码存储库的代码量增多，如果在每次提交代码时，我们都对全量代码执行格式化和检查，将会性能低下，我们希望提交代码时只对当前发生了代码变更的文件执行格式化和检查，那么我们就需要 lint-staged 工具。
-
-同时我们还希望对 commit message 进行格式检查确保其基本符合 Angular 规范，这有利于根据 commit message 自动生成 changelog 和 release note，此时就需要用上 commitlint 工具。
-
-### 配置 eslint、prettier
-
 首先把 client 和 server 共同的 eslint、prettier 相关依赖抽离到根目录的 package.json，同时添加两条新的 script，虽然 vite 创建的 client 项目并没有 prettier，但等会我们自己加上一些配置。
+
+删除以下注释的语句
+
+```json title="apps/client/package.json"
+{
+  "name": "client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    // "@typescript-eslint/eslint-plugin": "^6.0.0",
+    // "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.3",
+    // "eslint": "^8.45.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    // "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  }
+}
+```
+
+```json title="apps/server/package.json"
+{
+  // ...
+  "devDependencies": {
+    "@nestjs/cli": "^10.0.0",
+    "@nestjs/schematics": "^10.0.0",
+    "@nestjs/testing": "^10.0.0",
+    "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.2",
+    "@types/node": "^20.3.1",
+    "@types/supertest": "^2.0.12",
+    // "@typescript-eslint/eslint-plugin": "^6.0.0",
+    // "@typescript-eslint/parser": "^6.0.0",
+    // "eslint": "^8.42.0",
+    // "eslint-config-prettier": "^9.0.0",
+    // "eslint-plugin-prettier": "^5.0.0",
+    "jest": "^29.5.0",
+    // "prettier": "^3.0.0",
+    "source-map-support": "^0.5.21",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.0",
+    "ts-loader": "^9.4.3",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0"
+    // "typescript": "^5.1.3"
+  }
+  // ...
+}
+```
+
+在根目录加上
 
 ```json title="package.json"
 {
   ...
   "scripts": {
     "format": "prettier --config .prettierrc . --write",
-    "lint": "pnpm --reporter append-only -F ./apps/* lint",
+    "lint": "pnpm -F ./apps/* lint",
     ...
   },
   "devDependencies": {
-    "@types/node": "^20.8.7",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.8.0",
     "eslint": "^8.52.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "prettier": "^3.0.3",
-    "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   }
 }
+```
+
+重新安装一下
+
+```shell
+pnpm i
 ```
 
 format 命令使用 .prettierrc 文件的配置对根文件夹下的所有文件进行格式化，但现在没有我们先创建一下。
@@ -83,21 +146,21 @@ pnpm-workspace.yaml
 
 这时先安装两个插件，搜索 `eslint` 和 `prettier`。
 
-![](./img/02-img-10.png)
+![](./img/02/02-img-10.png)
 
-![](./img/02-img-11.png)
+![](./img/02/02-img-11.png)
 
 因为我设置了 prettier 规则的"semi" 为 false，这个配置是让代码不需要`;`结尾，此时添加一个分号到 `apps/server/src/main.ts` 上，你会发现编辑器会有对应的报错提示，当你点击保存，代码将被 prettier 自动格式化了。
 
 因为接下来先测试一下 lint 和 format 命令。所以先把自动格式化清除。
 
-![](./img/02-img-01.png)
+![](./img/02/02-img-01.png)
 
 把 Format On Save 取消勾选即可。
 
 此时我们分别在 `apps/client/src/main.tsx` 和 `apps/server/src/main.ts` 代码里随便上添加一个`;`号，保存(此时不会自动修复了)然后执行 pnpm lint。
 
-![](./img/02-img-02.png)
+![](./img/02/02-img-02.png)
 
 此时可以看到 client 那边没有任何错误提示，而 server 这边有，并且项目根目录下执行 pnpm lint 也只有 server 会报错。这是因为我前面说了 vite 创建的 client 项目并没有 prettier，所以现在需要在 eslint 的 extends 加入一个 prettier 的规则来使 prettier 的规则在 eslint 生效。
 
@@ -127,44 +190,9 @@ module.exports = {
 
 ### husk 管理 git hook
 
-首先在项目根目录 初始化 git 仓库
+如果仅有 eslint 和 prettier，那我们需要在代码提交前手动执行 prettier 和 eslint ，对代码进行格式化以及代码质量和格式检查，这时候可以使用 git 的 hook 功能，而 husky 工具可以创建管理仓库中的所有 git hooks。
 
-添加 `.gitignore` 文件
-
-```json title=".gitignore"
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-```
-
-```shell
-git init
-git add .
-git commit -m "init"
-```
-
-然后在项目根目录安装 husky 包
+在项目根目录安装 husky 包
 
 ```shell
 pnpm i -w -D husky
@@ -211,13 +239,15 @@ pnpm lint
 
 我们再来验证一下是否生效，再在代码里随便加一个`;`号，然后提交一个 commit。
 
-![](./img/02-img-03.png)
+![](./img/02/02-img-03.png)
 
 可以看到确实执行 package.json 中的 lint 脚本，然后输出了错误信息，并且中断了 git commit 过程。
 
 删掉 `;` 号重新提交 commit，可以看到成功提交了。
 
 ### lint-staged 使用
+
+随着代码存储库的代码量增多，如果在每次提交代码时，我们都对全量代码执行格式化和检查，将会性能低下，我们希望提交代码时只对当前发生了代码变更的文件执行格式化和检查，那么我们就需要 lint-staged 工具。
 
 [lint-staged](https://www.npmjs.com/package/lint-staged) 的作用是仅对变更的文件执行相关操作，在这里就是执行 eslint 检查，先安装。
 
@@ -260,11 +290,13 @@ npx lint-staged
 
 我们再来验证一下是否生效，再在代码里随便加一个`;`号，然后提交一个 commit。
 
-![](./img/02-img-04.png)
+![](./img/02/02-img-04.png)
 
 可以看到提交中断了。
 
 ### 使用 commitlint 对提交消息检查
+
+我们还希望对 commit message 进行格式检查确保其基本符合 Angular 规范，这有利于根据 commit message 自动生成 changelog 和 release note，此时就需要用上 commitlint 工具。
 
 在项目根目录下载
 
@@ -290,7 +322,7 @@ npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
 
 我们随便提交一下看看。
 
-![](./img/02-img-05.png)
+![](./img/02/02-img-05.png)
 
 可以看到消息不符合规范，commit 被中断了，那怎么符合规范呢，这时候试试一个符合规范的 message 。
 
@@ -300,16 +332,16 @@ git commit -m "feat: commitlint init"
 
 这时候便提交成功了，对于这个 commit message 的规范，可以去看看 commitlint 的文档，而我推荐使用一个 vscode 插件进行提交，这样会有提示，搜索`Conventional Commits`。
 
-![](./img/02-img-06.png)
+![](./img/02/02-img-06.png)
 
 以后需要提交代码时就， `ctrl` + `shift` + `P`
 
-![](./img/02-img-07.png)
+![](./img/02/02-img-07.png)
 
-![](./img/02-img-08.png)
+![](./img/02/02-img-08.png)
 
 你可以看到对应的提交类型，按照你对文件的修改属于什么性质选择即可。
 
-![](./img/02-img-09.png)
+![](./img/02/02-img-09.png)
 
 其实就是给你生成了对应的前缀，已方便后续管理提交历史。

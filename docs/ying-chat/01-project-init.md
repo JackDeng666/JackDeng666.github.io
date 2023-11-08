@@ -47,7 +47,7 @@ npm i @nestjs/cli -g
 
 最后在 package.json 加多一条 dev 命令
 
-```json title="apps/client/package.json"
+```json title="apps/server/package.json"
 {
   ...
   "scripts": {
@@ -89,7 +89,7 @@ packages:
   ...
   "scripts": {
     "dev": "pnpm --reporter append-only -F ./apps/* dev",
-    "build": "pnpm --reporter append-only -F ./apps/* build"
+    "build": "pnpm -F ./apps/* build"
   },
   ...
 }
@@ -108,10 +108,25 @@ pnpm i
 pnpm dev
 ```
 
-![](./img/01-img01.png)
+![](./img/01/01-img01.png)
 
 启动完成后，访问以下链接查看效果
 
 [http://localhost:5173](http://localhost:5173)
 
 [http://localhost:3000](http://localhost:3000)
+
+### 初始化 git 仓库
+
+添加 `.gitignore` 文件
+
+```json title=".gitignore"
+node_modules
+dist
+```
+
+```shell
+git init
+git add .
+git commit -m "init"
+```
