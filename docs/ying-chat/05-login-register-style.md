@@ -125,7 +125,7 @@ export const Register = () => {
             <Input
               prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="Username"
-              autoComplete="off"
+              autoComplete="new-username"
             />
           </Form.Item>
           <Form.Item
@@ -140,7 +140,7 @@ export const Register = () => {
             <Input
               prefix={<MailOutlined className="site-form-item-icon" />}
               placeholder="Email"
-              autoComplete="off"
+              autoComplete="new-email"
             />
           </Form.Item>
           <Form.Item
@@ -151,7 +151,7 @@ export const Register = () => {
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
               placeholder="Password"
-              autoComplete="off"
+              autoComplete="new-password"
             />
           </Form.Item>
           <Form.Item

@@ -42,7 +42,7 @@ const MusicPlayer = React.memo(() => {
         <meting-js
           server="netease"
           type="playlist"
-          id="2981441842"
+          id="8850796793"
           fixed="true"
           autoplay="true"
         ></meting-js>
