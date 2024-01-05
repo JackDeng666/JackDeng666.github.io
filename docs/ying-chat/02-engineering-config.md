@@ -4,7 +4,7 @@ sidebar_label: 工程化配置
 title: 工程化配置
 ---
 
-monorepo 的一个优势点是，可以让我们在多个项目中，标准化一套代码 prettier、eslint、git hook 等配置。
+monorepo 的一个优势点是，可以让我们在多个项目中，标准化一套代码 prettier、eslint、git hook 等配置，那么本节就来把这些全部配置好吧。
 
 ### 配置 eslint、prettier
 
@@ -14,35 +14,22 @@ eslint 也可以对代码进行一定的自动格式化，但这并不是 eslint
 
 首先把 client 和 server 共同的 eslint、prettier 相关依赖抽离到根目录的 package.json，同时添加两条新的 script，虽然 vite 创建的 client 项目并没有 prettier，但等会我们自己加上一些配置。
 
-删除以下注释的语句
+删除以下文件中注释的语句
 
 ```json title="apps/client/package.json"
 {
-  "name": "client",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
+  // ...
   "devDependencies": {
-    "@types/react": "^18.2.15",
-    "@types/react-dom": "^18.2.7",
-    // "@typescript-eslint/eslint-plugin": "^6.0.0",
-    // "@typescript-eslint/parser": "^6.0.0",
-    "@vitejs/plugin-react": "^4.0.3",
-    // "eslint": "^8.45.0",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    // "@typescript-eslint/eslint-plugin": "^6.14.0",
+    // "@typescript-eslint/parser": "^6.14.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    // "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.3",
-    // "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "eslint-plugin-react-refresh": "^0.4.5",
+    // "typescript": "^5.2.2",
+    "vite": "^5.0.8"
   }
 }
 ```
@@ -69,7 +56,7 @@ eslint 也可以对代码进行一定的自动格式化，但这并不是 eslint
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",
     "ts-loader": "^9.4.3",
-    "ts-node": "^10.9.1",
+    // "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0"
     // "typescript": "^5.1.3"
   }
@@ -77,7 +64,7 @@ eslint 也可以对代码进行一定的自动格式化，但这并不是 eslint
 }
 ```
 
-在根目录加上
+然后在项目根目录加上
 
 ```json title="package.json"
 {
@@ -88,12 +75,13 @@ eslint 也可以对代码进行一定的自动格式化，但这并不是 eslint
     ...
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.8.0",
-    "@typescript-eslint/parser": "^6.8.0",
-    "eslint": "^8.52.0",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "prettier": "^3.0.3",
+    "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   }
 }
@@ -105,7 +93,9 @@ eslint 也可以对代码进行一定的自动格式化，但这并不是 eslint
 pnpm i
 ```
 
-format 命令使用 .prettierrc 文件的配置对根文件夹下的所有文件进行格式化，但现在没有我们先创建一下。
+这样项目公用的依赖就可以抽离出来了安装在根目录的 `node_modules` 了。
+
+format 命令将会使用 `.prettierrc` 文件的配置对根文件夹下的所有文件进行格式化，但现在还没有需要先创建一下。
 
 ```json title=".prettierrc"
 {
@@ -113,7 +103,6 @@ format 命令使用 .prettierrc 文件的配置对根文件夹下的所有文件
   "singleQuote": true,
   "printWidth": 80,
   "tabWidth": 2,
-  "useTabs": true,
   "trailingComma": "none",
   "arrowParens": "avoid",
   "endOfLine": "lf"
@@ -131,7 +120,25 @@ pnpm-lock.yaml
 pnpm-workspace.yaml
 ```
 
-先修改一下以下文件，把原来的--fix 去掉，有 --fix 执行 lint 会自动修复，我们现在要它报错。
+还要把 `apps/server/.prettierrc` 文件删除掉，已经不需要这个了。
+
+这时先安装两个插件，搜索 `eslint` 和 `prettier`。
+
+![](./img/02/10.png)
+
+![](./img/02/11.png)
+
+现在重启一下 vscode。
+
+直接打开 `apps/server/src/main.ts` 文件，会发现编辑器会有对应 `;` 的报错提示，因为我设置了 prettier 规则的"semi" 为 false，这个配置是让代码不需要`;`结尾，直接 Ctrl + S 保存一下，代码将被 prettier 自动格式化了。
+
+因为接下来要先测试一下 lint 和 format 命令。所以先把自动格式化清除。
+
+![](./img/02/01.png)
+
+把 Format On Save 取消勾选即可。
+
+现在先修改一下以下文件，把原来的--fix 去掉，有 --fix 执行 lint 会自动修复，我们现在要它报错。
 
 ```json title="apps/server/package.json"
 {
@@ -144,25 +151,11 @@ pnpm-workspace.yaml
 }
 ```
 
-这时先安装两个插件，搜索 `eslint` 和 `prettier`。
-
-![](./img/02/02-img-10.png)
-
-![](./img/02/02-img-11.png)
-
-因为我设置了 prettier 规则的"semi" 为 false，这个配置是让代码不需要`;`结尾，此时添加一个分号到 `apps/server/src/main.ts` 上，你会发现编辑器会有对应的报错提示，当你点击保存，代码将被 prettier 自动格式化了。
-
-因为接下来先测试一下 lint 和 format 命令。所以先把自动格式化清除。
-
-![](./img/02/02-img-01.png)
-
-把 Format On Save 取消勾选即可。
-
 此时我们分别在 `apps/client/src/main.tsx` 和 `apps/server/src/main.ts` 代码里随便上添加一个`;`号，保存(此时不会自动修复了)然后执行 pnpm lint。
 
-![](./img/02/02-img-02.png)
+![](./img/02/02.png)
 
-此时可以看到 client 那边没有任何错误提示，而 server 这边有，并且项目根目录下执行 pnpm lint 也只有 server 会报错。这是因为我前面说了 vite 创建的 client 项目并没有 prettier，所以现在需要在 eslint 的 extends 加入一个 prettier 的规则来使 prettier 的规则在 eslint 生效。
+此时可以看到 client 那边没有任何错误提示，而 server 这边有，并且项目根目录下执行 pnpm lint 也只有 server 会报错。这是因为我前面说了 vite 创建的 client 项目并没有 prettier，所以现在需要在 eslint 的 extends 加入一个 prettier 的规则来使 prettier 的规则在 client 的 eslint 生效。
 
 ```js title="apps/client/.eslintrc.cjs"
 module.exports = {
@@ -186,9 +179,17 @@ module.exports = {
 }
 ```
 
-此时应该可以看到编辑器报错了，并且 client 的 lint 也不会通过。
+此时应该可以看到编辑器报错了，并且重新执行 `pnpm lint` 发现 client 的 lint 也不会通过。
+
+现在可以执行 `pnpm format`，把全部文件格式化一遍先。
+
+```shell
+pnpm format
+```
 
 ### husk 管理 git hook
+
+[husk文档](https://typicode.github.io/husky/)
 
 如果仅有 eslint 和 prettier，那我们需要在代码提交前手动执行 prettier 和 eslint ，对代码进行格式化以及代码质量和格式检查，这时候可以使用 git 的 hook 功能，而 husky 工具可以创建管理仓库中的所有 git hooks。
 
@@ -198,9 +199,9 @@ module.exports = {
 pnpm i -w -D husky
 ```
 
-`-w` 表示在根目录的 node_modules 下载安装
+`-w` 表示在根目录的 node_modules 下载安装依赖
 
-然后通过 npx 执行 husky install 命令启用 git hook
+然后通过 pnpx 执行 husky install 命令启用 git hook
 
 ```shell
 npx husky install
@@ -239,23 +240,28 @@ pnpm lint
 
 我们再来验证一下是否生效，再在代码里随便加一个`;`号，然后提交一个 commit。
 
-![](./img/02/02-img-03.png)
+```shell
+git add .
+git commit -m "use git hook"
+```
+
+![](./img/02/03.png)
 
 可以看到确实执行 package.json 中的 lint 脚本，然后输出了错误信息，并且中断了 git commit 过程。
 
-删掉 `;` 号重新提交 commit，可以看到成功提交了。
+删掉 `;` 号重新 add 并提交 commit，可以看到成功提交了。
 
 ### lint-staged 使用
 
-随着代码存储库的代码量增多，如果在每次提交代码时，我们都对全量代码执行格式化和检查，将会性能低下，我们希望提交代码时只对当前发生了代码变更的文件执行格式化和检查，那么我们就需要 lint-staged 工具。
+[lint-staged文档](https://www.npmjs.com/package/lint-staged)
 
-[lint-staged](https://www.npmjs.com/package/lint-staged) 的作用是仅对变更的文件执行相关操作，在这里就是执行 eslint 检查，先安装。
+随着代码存储库的代码量增多，如果在每次提交代码时，我们都对全量代码执行格式化和检查，将会性能低下，我们希望提交代码时只对当前发生了代码变更的文件执行格式化和检查，那么我们就需要 lint-staged 工具。
 
 ```shell
 pnpm i -w -D lint-staged
 ```
 
-修改以下文件
+在两个子项目的 `package.json` 中加入 `lint-staged` 配置：
 
 ```json title="apps/client/package.json"
 {
@@ -278,7 +284,7 @@ pnpm i -w -D lint-staged
 }
 ```
 
-最后修改 pre-commit hook
+`lint-staged` 的作用是仅对变更的文件执行相关操作，在这里就是执行 eslint 检查，这样就不需要执行原来的 `lint` 脚本了，所以最后需要修改一下 pre-commit hook。
 
 ```json title=".husky/pre-commit"
 #!/usr/bin/env sh
@@ -290,13 +296,22 @@ npx lint-staged
 
 我们再来验证一下是否生效，再在代码里随便加一个`;`号，然后提交一个 commit。
 
-![](./img/02/02-img-04.png)
+```shell
+git add .
+git commit -m "lint-staged test"
+```
+
+![](./img/02/04.png)
 
 可以看到提交中断了。
 
+删掉 `;` 号重新 add 并提交 commit，可以看到成功提交了。
+
 ### 使用 commitlint 对提交消息检查
 
-我们还希望对 commit message 进行格式检查确保其基本符合 Angular 规范，这有利于根据 commit message 自动生成 changelog 和 release note，此时就需要用上 commitlint 工具。
+[commitlint文档](https://commitlint.js.org/#/)
+
+如果还希望对 commit message 进行格式检查确保其基本符合 Angular 规范，这有利于根据 commit message 自动生成 changelog 和 release note，此时就需要用上 commitlint 工具。
 
 在项目根目录下载
 
@@ -304,7 +319,7 @@ npx lint-staged
 pnpm i -w -D @commitlint/cli @commitlint/config-conventional
 ```
 
-添加`.commitlintrc.json`文件
+添加 `.commitlintrc.json` 文件到根目录
 
 ```json title=".commitlintrc.json"
 {
@@ -320,9 +335,14 @@ npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
 
 它的作用是在我们提交 commit 或者修改 commit message 时对 commit message 进行相关校验，这样就可以确保我们的项目拥有一个统一的 commit message 风格。
 
-我们随便提交一下看看。
+接下来随便提交一下看看。
 
-![](./img/02/02-img-05.png)
+```shell
+git add .
+git commit -m "commitlint init"
+```
+
+![](./img/02/05.png)
 
 可以看到消息不符合规范，commit 被中断了，那怎么符合规范呢，这时候试试一个符合规范的 message 。
 
@@ -332,16 +352,19 @@ git commit -m "feat: commitlint init"
 
 这时候便提交成功了，对于这个 commit message 的规范，可以去看看 commitlint 的文档，而我推荐使用一个 vscode 插件进行提交，这样会有提示，搜索`Conventional Commits`。
 
-![](./img/02/02-img-06.png)
+![](./img/02/06.png)
 
 以后需要提交代码时就， `ctrl` + `shift` + `P`
 
-![](./img/02/02-img-07.png)
+![](./img/02/07.png)
 
-![](./img/02/02-img-08.png)
+![](./img/02/08.png)
 
 你可以看到对应的提交类型，按照你对文件的修改属于什么性质选择即可。
 
-![](./img/02/02-img-09.png)
+![](./img/02/09.png)
 
 其实就是给你生成了对应的前缀，已方便后续管理提交历史。
+
+
+本节的项目工程化配置就到这里结束，测试完成后可以把 prettier 的自动保存修复改回去了，这个还是挺好用的。

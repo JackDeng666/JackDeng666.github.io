@@ -1,10 +1,14 @@
 ---
 slug: publish-vue-components-to-npm
 date: 2021-11-21
-title: 封装vue组件并发布到npm
+title: 封装 vue 组件并发布到 npm
 authors: [jack]
 tags: [js, vue, 前端]
 ---
+
+本篇文章来研究一下如何封装 vue 组件并发布到 npm，然后在其他项目下载使用。
+
+<!--truncate-->
 
 ### 1. 项目初始化
 
@@ -14,8 +18,6 @@ tags: [js, vue, 前端]
 ```shell
 vue init webpack-simple [项目名]
 ```
-
-<!--truncate-->
 
 但是因为用了 vue-cli 4 以上的版本（我是@vue/cli 4.5.15） ，报了个错
 
