@@ -3,7 +3,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
 import MusicPlayer from '../components/MusicPlayer'
 import Intro from './components/Intro'
-import Skills from './components/Skills'
+import Skills from './components/SkillsV2'
 import Characteristic from './components/Characteristic'
 
 export default function Home(): JSX.Element {

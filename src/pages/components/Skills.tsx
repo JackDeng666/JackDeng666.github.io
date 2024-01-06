@@ -22,7 +22,7 @@ export default function Skills() {
 
   useEffect(() => {
     const scollEffect = getScollEffect()
-    scollEffect.addScollEvents((scollPos) => {
+    scollEffect.addScollEvents(scollPos => {
       if (scollPos > 0.3) {
         setVisible(true)
       }
@@ -38,7 +38,7 @@ export default function Skills() {
     })
     const list = randomPosition
       .generateList()
-      .map((el) => ({ x: el.x / 16, y: el.y / 16 }))
+      .map(el => ({ x: el.x / 16, y: el.y / 16 }))
     scollEffect.addEffectItem({
       element: document.getElementById('skill-bg'),
       opacityAnimMap: new Map([

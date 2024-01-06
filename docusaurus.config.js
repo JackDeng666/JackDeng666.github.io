@@ -91,8 +91,8 @@ const config = {
             label: 'YingChat项目实战',
             to: 'docs/ying-chat/',
             position: 'right'
-          }
-          // { to: '/blog', label: '博客', position: 'right' }
+          },
+          { to: '/blog', label: '博客', position: 'right' }
         ]
       },
       docs: {
