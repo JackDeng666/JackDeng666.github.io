@@ -83,6 +83,11 @@ const config = {
         hideOnScroll: true,
         items: [
           {
+            label: 'CICD',
+            to: 'docs/ci-cd/',
+            position: 'right'
+          },
+          {
             label: 'Docker',
             to: 'docs/docker/',
             position: 'right'
