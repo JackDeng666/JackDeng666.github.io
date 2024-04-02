@@ -17,10 +17,10 @@ linux 下跑命令
 ```shell
 docker run --name mysql-test \
   -p 3306:3306 \
-  -v D:/DockerData/ContainerBackup/mysql5.7-data:/var/lib/mysql \
+  -v D:/DockerData/ContainerBackup/mysql-data:/var/lib/mysql \
   -e MYSQL_ROOT_PASSWORD=ying123456 \
   -e TZ=Asia/Shanghai \
-  -d mysql
+  -d --restart=always mysql
 ```
 
 如果是在 windows 下使用 cmd 跑命令，把 `\` 换行符改为 `^` 即可。
@@ -36,6 +36,7 @@ services:
     environment:
       TZ: Asia/Shanghai
       MYSQL_ROOT_PASSWORD: ying123456
+    restart: always
     volumes:
       - D:/DockerData/ContainerBackup/mysql-data:/var/lib/mysql
     ports:

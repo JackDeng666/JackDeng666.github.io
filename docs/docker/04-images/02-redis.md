@@ -12,7 +12,7 @@ linux 下跑命令
 docker run --name redis-test \
   -p 6379:6379 \
   -v D:/DockerData/ContainerBackup/redis-data:/data \
-  -d redis
+  -d --restart=always redis --requirepass ying123456
 ```
 
 如果是在 windows 下使用 cmd 跑命令，把 `\` 换行符改为 `^` 即可。
@@ -22,11 +22,13 @@ docker run --name redis-test \
 ```yml
 version: '3'
 services:
-  minio:
+  redis:
     container_name: redis-test
     image: redis
     volumes:
       - D:/DockerData/ContainerBackup/redis-data:/data
+    restart: always
+    command: --requirepass ying123456
     ports:
       - '6379:6379'
 ```
