@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkying_blog=self.webpackChunkying_blog||[]).push([[4018],{9515:l=>{l.exports=JSON.parse('{"label":"minio","permalink":"/blog/tags/minio","allTagsPath":"/blog/tags","count":1}')}}]);

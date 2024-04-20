@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkying_blog=self.webpackChunkying_blog||[]).push([[6793],{4411:l=>{l.exports=JSON.parse('{"label":"1panel","permalink":"/blog/tags/1-panel","allTagsPath":"/blog/tags","count":2}')}}]);
