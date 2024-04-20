@@ -31,7 +31,7 @@ function NavbarItems({ items }: { items: NavbarItemConfig[] }): JSX.Element {
       {items.map((item, i) => (
         <ErrorCauseBoundary
           key={i}
-          onError={(error) =>
+          onError={error =>
             new Error(
               `A theme navbar item failed to render.
 Please double-check the following navbar item (themeConfig.navbar.items) of your Docusaurus config:
@@ -68,7 +68,7 @@ export default function NavbarContent(): JSX.Element {
   const items = useNavbarItems()
   const [leftItems, rightItems] = splitNavbarItems(items)
 
-  const searchBarItem = items.find((item) => item.type === 'search')
+  const searchBarItem = items.find(item => item.type === 'search')
 
   return (
     <NavbarContentLayout
@@ -77,6 +77,10 @@ export default function NavbarContent(): JSX.Element {
         <>
           {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
           <NavbarLogo />
+          <img
+            src="/img/snow_pixel_loli_4.gif"
+            style={{ width: '47px', height: '38px' }}
+          />
           <NavbarItems items={leftItems} />
         </>
       }

@@ -1,0 +1,16 @@
+.skillBox {
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+  padding: 0 1.5rem;
+  .skillWrap {
+    pointer-events: all;
+    position: relative;
+  }
+}

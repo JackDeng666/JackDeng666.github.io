@@ -24,7 +24,7 @@ export class ScollEffect {
       )
       // console.log(scrollPos)
       this._handleEffectItem(scrollPos)
-      this.scollEvents.forEach((fuc) => fuc(scrollPos))
+      this.scollEvents.forEach(fuc => fuc(scrollPos))
     }
 
     document.addEventListener('scroll', handleScroll)
@@ -135,9 +135,9 @@ export class ScollEffect {
   _calcPosition(scrollPos: number, map: Map<number, TransformKey | number>) {
     const keyArr = [...map.keys()].sort((a, b) => a - b)
 
-    const beginPos = keyArr.findLast((item) => item <= scrollPos)
+    const beginPos = keyArr.findLast(item => item <= scrollPos)
     let beginValue = map.get(beginPos)
-    const endPos = keyArr.find((item) => item >= scrollPos)
+    const endPos = keyArr.find(item => item >= scrollPos)
     let endValue = map.get(endPos)
 
     if (beginValue === undefined && endValue !== undefined) {
@@ -157,7 +157,7 @@ export class ScollEffect {
   }
 
   private _handleEffectItem(scrollPos: number) {
-    this.effectItems.forEach((item) => {
+    this.effectItems.forEach(item => {
       if (item.opacityAnimMap?.size) {
         const calcPosition1 = this._calcPosition(scrollPos, item.opacityAnimMap)
 
@@ -211,9 +211,9 @@ export class ScollEffect {
   removeEffectItem(val: EffectItem[]): void
   removeEffectItem(val: EffectItem[] | EffectItem) {
     if (Array.isArray(val)) {
-      this.effectItems = this.effectItems.filter((ei) => !val.includes(ei))
+      this.effectItems = this.effectItems.filter(ei => !val.includes(ei))
     } else {
-      this.effectItems = this.effectItems.filter((ei) => ei !== val)
+      this.effectItems = this.effectItems.filter(ei => ei !== val)
     }
   }
 }

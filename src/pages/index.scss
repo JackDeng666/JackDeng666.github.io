@@ -1,0 +1,36 @@
+html {
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-snap-align: center;
+  &.intro {
+    height: auto;
+    position: relative;
+  }
+  &.project {
+    height: 100vh;
+  }
+}
+
+.iconBox {
+  width: 3.4rem;
+  height: 3.4rem;
+  padding: 0.5rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  svg {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
