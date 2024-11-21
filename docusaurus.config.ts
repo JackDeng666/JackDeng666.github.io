@@ -78,6 +78,11 @@ const config: Config = {
       hideOnScroll: false,
       items: [
         {
+          label: 'NodeJs学习',
+          to: 'docs/nodejs/',
+          position: 'right'
+        },
+        {
           label: 'CICD',
           to: 'docs/ci-cd/',
           position: 'right'

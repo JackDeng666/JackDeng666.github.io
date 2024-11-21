@@ -5,9 +5,16 @@ sidebar_label: Docker
 title: Docker 备忘录
 ---
 
-### 本文档主要用于记录 docker 的各种基本操作
+## 本文档主要用于记录 docker 的各种基本操作
 
-<!-- ### 构建镜像
+## 参考资料
+
+- [Docker 官方入门教程](https://docs.docker.com/get-started/)
+- [Docker 入门学习笔记](https://jaywcjlove.github.io/docker-tutorial)
+
+## 操作速查
+
+### 构建镜像
 
 ```shell
 $ docker build .
@@ -77,9 +84,3 @@ $ docker volume prune
 | `docker stack services <appname>`                | 列出与应用关联的服务                       |
 | `docker stack ps <appname>`                      | 列出与应用关联的正在运行的容器             |
 | `docker stack rm <appname>`                      | 拆掉一个应用程序                           |
-``` -->
-
-## 参考资料
-
-- [Docker 官方入门教程](https://docs.docker.com/get-started/)
-- [Docker 入门学习笔记](https://jaywcjlove.github.io/docker-tutorial)

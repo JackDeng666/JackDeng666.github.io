@@ -1,6 +1,6 @@
 ---
 slug: 1panel-minio-nginx-reverse-proxy-https
-date: 2024-1-22
+date: 2024-01-22
 title: 在1panel中启动MinIO并用Nginx反向代理为HTTPS连接
 authors: [jack]
 tags: [1panel, nginx, minio]
