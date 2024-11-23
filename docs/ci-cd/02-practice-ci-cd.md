@@ -1,7 +1,7 @@
 ---
 id: practice-ci-cd
-sidebar_label: 初步实践 CICD
-title: 初步实践 CICD 自动化部署纯前端项目
+sidebar_label: 初步实践自动化部署纯前端项目
+title: 初步实践自动化部署纯前端项目
 ---
 
 drone 的流水线是基于`.drone.yml` 文件配置去执行的，本篇我们将会实践编写这个文件，实现直接通过打包产物传输到服务器去部署前端项目的 CICD。

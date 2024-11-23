@@ -83,7 +83,7 @@ const config: Config = {
           position: 'right'
         },
         {
-          label: 'CICD',
+          label: 'CICD实践',
           to: 'docs/ci-cd/',
           position: 'right'
         },

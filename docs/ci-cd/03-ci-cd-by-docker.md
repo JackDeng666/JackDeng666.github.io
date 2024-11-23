@@ -1,7 +1,7 @@
 ---
 id: ci-cd-by-docker
-sidebar_label: 通过 docker 去实践 CICD
-title: 通过 docker 去实践 CICD
+sidebar_label: 实践自动化部署 docker 容器
+title: 实践自动化部署 docker 容器
 ---
 
 本篇我们将会通过 drone 去打包 docker 镜像来实现 CICD。

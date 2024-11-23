@@ -6,9 +6,9 @@ authors: [jack]
 tags: [前端, js, node]
 ---
 
-## Web Push
+要在网页上实现离线消息推送需要使用到 Web Push，Web Push 是一种在 Web 浏览器中向用户发送实时消息和离线消息的技术。当用户同意接收通知后，它允许网站向用户发送通知，即使用户没有打开或使用网站。这些消息将显示在用户的操作系统、浏览器或移动设备上，以吸引用户的注意并提供实时信息。这种技术主要依赖于 [Service Worker](https://developer.mozilla.org/zh-CN/docs/Web/API/Service_Worker_API)：一个在浏览器后台运行的脚本，可以在用户没有打开网页的情况下响应事件。
 
-Web Push（网页推送）是一种在 Web 浏览器中向用户发送实时消息的通信技术。它允许网站向用户发送通知，即使用户没有打开或使用网站。当用户同意接收通知后，网站可以通过 Web Push 服务向用户的设备发送推送消息，即使在用户没有打开应用的情况下也可以发送。这些消息将显示在用户的操作系统、浏览器或移动设备上，以吸引用户的注意并提供实时信息。这种技术主要依赖于 [Service Worker](https://developer.mozilla.org/zh-CN/docs/Web/API/Service_Worker_API) ：一个在浏览器后台运行的脚本，可以在用户没有打开网页的情况下响应事件。
+<!--truncate-->
 
 > 注意：经过个人测试在 PC 和安卓设备上，Chrome 和 Edge 都能使用 Web Push 通知，在 iOS 设备上目前还不支持。
 
