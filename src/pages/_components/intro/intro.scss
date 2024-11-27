@@ -11,6 +11,8 @@
     transform: translate(-50%, -50%);
     width: 100%;
     padding: 0 1.5rem;
+    perspective: 1660px;
+    overflow: hidden;
     .animateWrap {
       display: flex;
       flex-direction: column;

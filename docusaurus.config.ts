@@ -3,7 +3,7 @@ import type { Config } from '@docusaurus/types'
 import type * as Preset from '@docusaurus/preset-classic'
 
 const config: Config = {
-  title: '嘤嘤博客',
+  title: 'Ying Blog',
   tagline: 'ts全栈开发',
   favicon: 'img/favicon.png',
   url: 'https://jackdeng666.github.io',
@@ -70,12 +70,12 @@ const config: Config = {
       }
     ],
     navbar: {
-      title: '嘤嘤博客',
+      title: 'Ying Blog',
       logo: {
         alt: 'My Site Logo',
         src: 'img/favicon.png'
       },
-      hideOnScroll: false,
+      hideOnScroll: true,
       items: [
         {
           label: 'NodeJs学习',

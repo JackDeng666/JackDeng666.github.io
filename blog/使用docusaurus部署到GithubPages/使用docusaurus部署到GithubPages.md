@@ -15,6 +15,8 @@ docusaurus 是一个 react 的 ssg 框架，可以生成静态博客，因此可
 
 ### 1. github 创建仓库
 
+注意仓库必须以 `<github账号名>.github.io` 命名。
+
 ![](./img/img1.png)
 
 ### 2. 把 docusaurus 项目推送到仓库
@@ -36,9 +38,7 @@ git push -u origin main
 
 ![](./img/img3.png)
 
-因为仓库命名为 用户名.github.io，即可以通过 https://用户.github.io 的根目录，访问到当前项目的 readme.md 文件。
-
-如果项目名称不是 用户名.github.io, 那将通过 https://用户.github.io/其他名称 访问到 Github Pages。
+此时就可以通过连接 `https://<github账号名>.github.io` 访问到仓库 `<github账号名>.github.io` 的 `gh-pages` 分支里的内容。
 
 ## 部署
 
@@ -47,11 +47,11 @@ git push -u origin main
 ```js title="docusaurus.config.js"
 const config = {
   ...
-  url: 'https://JackDeng666.github.io',
+  url: 'https://<github账号名>.github.io',
   baseUrl: '/',
 
-  organizationName: 'JackDeng666', // 填写用户名
-  projectName: 'JackDeng666.github.io', // 填写项目名
+  organizationName: '<github账号名>', // 填写用户名
+  projectName: '<github账号名>.github.io', // 填写项目名
   deploymentBranch: 'gh-pages', // 填写分支为gh-pages
   ...
 }
@@ -78,7 +78,7 @@ const config = {
 }
 ```
 
-在本地先打包，部署检查，会发现许多问题，自行解决：
+在本地先打包，部署检查一下，看看会不会有问题：
 
 ```shell
 npm run build
@@ -87,8 +87,14 @@ npm run serve
 
 ### 3. 执行部署
 
+没问题就直接部署
+
 ```shell
 npm run deploy
 ```
 
-等那么一会会（一般 1-2min），浏览器输入 https://用户名.github.io/ 网址就可以看到效果了，如[我的地址](https://JackDeng666.github.io)。
+等待执行完成后，打包后的内容将会被传到 `<github账号名>.github.io` 仓库的 `gh-pages` 分支里，浏览器输入 `https://<github账号名>.github.io` 网址就可以看到效果了。
+
+## 其他项目使用 GitHub Pages
+
+假如现在你有一个仓库名称叫 `a`，同时也开启了 GitHub Pages，那么你通过 `https://<github账号名>.github.io/a` 即可访问到项目 `a` 的内容，也就是说 `https://<github账号名>.github.io` 根目录的内容就是由 `<github账号名>.github.io` 仓库所决定的。

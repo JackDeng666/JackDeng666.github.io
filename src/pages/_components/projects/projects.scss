@@ -1,75 +1,124 @@
-@import '../../index.scss';
+.project {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    font-size: 1.2rem;
+  }
+  .link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    gap: 1rem;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    .title {
+      font-weight: bold;
+    }
+    .github {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      svg {
+        font-size: 1.4rem;
+      }
+    }
+  }
+  img {
+    width: 100%;
+    max-height: 260px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+  }
+}
 
-.projects {
+.projectWrap {
   position: relative;
-  .progress {
+
+  .shell {
     position: sticky;
     top: 0;
     left: 0;
-    padding-top: 60px;
-    z-index: 9;
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      color: var(--ifm-color-primary);
-    }
-    .progressBar {
-      height: 10px;
-      background-color: var(--ifm-color-primary);
-    }
-  }
-  .project {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
     display: flex;
-    justify-content: center;
-    align-content: center;
-    padding: 1rem;
-    .container {
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    padding-top: 70px;
+    .tipWrap {
+      width: 100%;
       display: flex;
-      max-width: 1366px;
-      margin: auto;
-      gap: 1rem;
-      overflow: hidden;
-      @include mobile {
-        flex-direction: column;
+      flex-direction: column;
+      align-items: center;
+      color: var(--ifm-color-primary);
+      margin-bottom: 20px;
+      h2 {
+        margin-bottom: 0;
       }
-
-      img {
-        width: 50%;
-        object-fit: cover;
-        border-radius: 5px;
-        @include mobile {
+      .downIcon {
+        font-size: 2.8rem;
+      }
+    }
+    .slider {
+      width: 100%;
+      position: relative;
+      transition: transform 1s ease-in-out;
+      display: flex;
+      .item {
+        flex-shrink: 0;
+        position: relative;
+        transition: transform 1s ease-in-out;
+        transform-style: preserve-3d;
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -16%;
           width: 100%;
+          height: 60px;
+          box-shadow: 0 0 0 var(--mimicry-darkness-color),
+            0 0 0 var(--mimicry-highlight-color),
+            inset -3px -3px 9px var(--mimicry-highlight-color),
+            inset 3px 3px 9px var(--mimicry-darkness-color);
+          transform: rotateX(90deg) translate3d(0px, -20px, 0px);
         }
-      }
+        .box {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border: 4px solid #fff;
+          transform-style: preserve-3d;
 
-      .textWrap {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        flex: 1;
-        p {
-          font-size: 1.2rem;
-        }
-        .link {
-          display: inline-flex;
-          align-items: center;
-          justify-content: space-between;
-          border-radius: 5px;
-          padding: 0.5rem 1rem;
-          gap: 1rem;
-          font-size: 1.2rem;
-          margin-bottom: 1rem;
-          .title {
-            font-weight: bold;
+          &.front {
+            padding: 1rem;
+            overflow-y: auto;
           }
-          .github {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            svg {
-              font-size: 1.4rem;
-            }
+
+          /* 设置.left和.right元素的顶部偏移量为0，宽度为60px，背面不可见 */
+          &.right,
+          &.left {
+            top: 0;
+            width: 60px;
+            backface-visibility: hidden;
+          }
+
+          /* 设置.left元素的左侧偏移量为0，左边框宽度为5px，3D变换为向右平移1px，Z轴平移-60px，绕Y轴逆时针旋转90度，变换原点为左侧 */
+          &.left {
+            left: 0;
+            border-left-width: 5px;
+            transform: translate3d(1px, 0, -60px) rotateY(-90deg);
+            transform-origin: 0%;
+          }
+
+          /* 设置.right元素的右侧偏移量为0，右边框宽度为5px，3D变换为向左平移1px，Z轴平移-60px，绕Y轴顺时针旋转90度，变换原点为右侧 */
+          &.right {
+            right: 0;
+            border-right-width: 5px;
+            transform: translate3d(-1px, 0, -60px) rotateY(90deg);
+            transform-origin: 100%;
           }
         }
       }

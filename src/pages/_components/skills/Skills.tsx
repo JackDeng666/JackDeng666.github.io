@@ -167,7 +167,7 @@ export function Skills({ scrollYProgress }: { scrollYProgress: MotionValue }) {
   ]
 
   return (
-    <div className="skillBox" style={{ perspective: 1660 }}>
+    <div className="skillBox">
       <motion.div className="skillWrap" style={{ scale, rotateY }}>
         <BgIcon scrollYProgress={scrollYProgress} />
         {logos.map((logo, index) => {

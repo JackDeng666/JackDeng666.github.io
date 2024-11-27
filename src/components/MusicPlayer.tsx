@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 let loadNum = 0
 
-const MusicPlayer = React.memo(() => {
+export const MusicPlayer = React.memo(() => {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const MusicPlayer = React.memo(() => {
         <meting-js
           server="netease"
           type="playlist"
-          id="8850796793"
+          id="2981726359"
           fixed="true"
           autoplay="true"
         ></meting-js>
@@ -50,5 +50,3 @@ const MusicPlayer = React.memo(() => {
     </>
   )
 })
-
-export default MusicPlayer

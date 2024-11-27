@@ -25,16 +25,16 @@ const contacts = [
     link: 'https://github.com/JackDeng666'
   },
   {
-    icon: 'ri:qq-fill',
-    link: 'img/qq.jpg'
-  },
-  {
     icon: 'uiw:weixin',
     link: 'img/wechat.png'
   },
   {
+    icon: 'ri:qq-fill',
+    link: 'img/qq.jpg'
+  },
+  {
     icon: 'clarity:email-solid',
-    link: 'mailto: 1556393081@qq.com'
+    link: 'mailto:1556393081@qq.com'
   }
 ]
 
@@ -43,53 +43,33 @@ export function Contact() {
   const inView = useInView(ref)
 
   return (
-    <>
-      <div className="contactBox">
-        <div className="contactWrap" ref={ref}>
-          <motion.div
-            variants={contactVariants}
-            initial="initial"
-            animate={inView ? 'open' : ''}
-            className="flex-a-c"
-          >
-            {contacts.map((contact, index) => {
-              return (
-                <motion.div
-                  key={index}
-                  className="iconBox mimicry-button"
-                  variants={contactVariants}
-                >
-                  <Icon
-                    icon={contact.icon}
-                    color="var(--ifm-color-primary)"
-                    onClick={() => {
-                      window.open(contact.link)
-                    }}
-                  ></Icon>
-                </motion.div>
-              )
-            })}
-          </motion.div>
-          <motion.div
-            initial={{
-              opacity: 0.3,
-              y: 0
-            }}
-            animate={{
-              opacity: 1,
-              y: 10,
-              transition: {
-                duration: 0.8,
-                repeat: Infinity,
-                repeatType: 'mirror'
-              }
-            }}
-          >
-            <Icon icon="pixelarticons:arrow-down" className="downIcon" />
-          </motion.div>
-        </div>
+    <div className="contactBox">
+      <div ref={ref}>
+        <motion.div
+          variants={contactVariants}
+          initial="initial"
+          animate={inView ? 'open' : ''}
+          className="flex-a-c"
+        >
+          {contacts.map((contact, index) => {
+            return (
+              <motion.div
+                key={index}
+                className="iconBox mimicry-button"
+                variants={contactVariants}
+              >
+                <Icon
+                  icon={contact.icon}
+                  color="var(--ifm-color-primary)"
+                  onClick={() => {
+                    window.open(contact.link)
+                  }}
+                ></Icon>
+              </motion.div>
+            )
+          })}
+        </motion.div>
       </div>
-      <div style={{ height: '50vh' }}></div>
-    </>
+    </div>
   )
 }

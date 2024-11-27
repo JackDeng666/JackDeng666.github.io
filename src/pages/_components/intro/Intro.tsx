@@ -8,11 +8,9 @@ import './intro.scss'
 
 const textVariants: Variants = {
   initial: {
-    x: 100,
     opacity: 0
   },
   animate: {
-    x: 0,
     opacity: 1,
     transition: {
       duration: 0.8,
@@ -43,8 +41,8 @@ export function Intro({ scrollYProgress }: { scrollYProgress: MotionValue }) {
   useEffect(() => {
     const typed = new Typed('.text', {
       strings: [
-        '欢迎来到嘤嘤博客！我是<span style="color: var(--ifm-color-primary);">JackDeng</span>，<br/><span style="font-size: 1.6rem;">一名喜欢唱、跳、Rap</span>',
-        '欢迎来到嘤嘤博客！我是<span style="color: var(--ifm-color-primary);">JackDeng</span>，<br/><span style="font-size: 1.6rem;">一名^800喜欢用 JS 进行全栈开发的开发者。</span>'
+        '欢迎来到<span style="color: var(--ifm-color-primary);">Ying Blog</span>！我是<span style="color: var(--ifm-color-primary);">JackDeng</span>，<br/><span style="font-size: 1.6rem;">一名喜欢唱、跳、Rap</span>',
+        '欢迎来到<span style="color: var(--ifm-color-primary);">Ying Blog</span>！我是<span style="color: var(--ifm-color-primary);">JackDeng</span>，<br/><span style="font-size: 1.6rem;">一名^800喜欢用 JS 的全栈开发者。</span>'
       ],
       typeSpeed: 100,
       backSpeed: 60,
@@ -58,7 +56,7 @@ export function Intro({ scrollYProgress }: { scrollYProgress: MotionValue }) {
 
   return (
     <div className="introBox">
-      <div className="introWrap" style={{ perspective: 1660 }}>
+      <div className="introWrap">
         <motion.div
           style={{
             x,

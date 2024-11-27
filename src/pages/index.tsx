@@ -6,7 +6,7 @@ import { Intro } from './_components/intro/Intro'
 import { Contact } from './_components/contact/Contact'
 import { Skills } from './_components/skills/Skills'
 import { Projects } from './_components/projects/Projects'
-import MusicPlayer from '../components/MusicPlayer'
+import { MusicPlayer } from '../components/MusicPlayer'
 import './index.scss'
 
 export default function Home(): JSX.Element {
@@ -23,10 +23,10 @@ export default function Home(): JSX.Element {
       <section className="intro" ref={ref}>
         <Intro scrollYProgress={scrollYProgress} />
         <Skills scrollYProgress={scrollYProgress} />
-        <div style={{ height: '50vh' }}></div>
-        <Contact />
+        <div style={{ height: '100vh' }}></div>
       </section>
       <Projects />
+      <Contact />
       <MusicPlayer />
     </Layout>
   )
