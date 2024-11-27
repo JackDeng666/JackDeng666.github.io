@@ -6,8 +6,9 @@ authors: [jack]
 tags: [docusaurus, react, 前端]
 ---
 
-docusaurus 是一个 react 的 ssg 框架，可以生成静态博客，因此可以部署到许多免费的静态文件托管服务上，如 Github Pages，Vercel。
-并且 docusaurus 自带自动推送 githubpages，所以这里用 GithubPages 部署。
+docusaurus 是一个 react 的 ssg 框架，可以生成静态博客，因此可以部署到许多免费的静态文件托管服务上，如 Github Pages、Vercel。
+
+并且 docusaurus 自带自动推送到 Github Pages 的部署命令，所以本篇文章记录一下用 Github Pages 部署的流程。
 
 <!--truncate-->
 
