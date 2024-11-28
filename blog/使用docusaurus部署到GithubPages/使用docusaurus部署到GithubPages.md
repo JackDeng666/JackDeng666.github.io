@@ -27,7 +27,7 @@ git init
 git add .
 git commit -m "first commit"
 git branch -M main
-git remote add origin git@github.com:JackDeng666/JackDeng666.github.io.git
+git remote add origin git@github.com:<github账号名>/<github账号名>.github.io.git
 git push -u origin main
 ```
 

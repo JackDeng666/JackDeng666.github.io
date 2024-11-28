@@ -6,7 +6,7 @@ const config: Config = {
   title: 'Ying Blog',
   tagline: 'ts全栈开发',
   favicon: 'img/favicon.png',
-  url: 'https://jackdeng666.github.io',
+  url: 'https://blog.ying-land.top',
   baseUrl: '/',
 
   // GitHub pages deployment config.
